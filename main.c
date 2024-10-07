@@ -1,4 +1,7 @@
 #include <stdio.h>
+//Name: Nicholas Wise
+//Project Discription:
+// Emulating Space invaders using the Intel 8080 microcomputer
 /*
  *codebuffer is a valid pointer to 8080 assembly code
  pc is the current offset into the code
