@@ -13,7 +13,7 @@
        int opbytes = 1;
        printf("%04x", pc);
        switch(*code) {
-           // DATA TRANSFER
+           /// // DATA TRANSFER // ///
            // SSS is source, and DDD is destination
            // We have 7 registers that use these ID's:
            // A 111
@@ -121,7 +121,82 @@
            case 0x21: printf("LXI H,D16"); break;
            case 0x31: printf("LXI SP,D16"); break;
 
-           //ARITHMETIC
+           // LDA (Load Accumulator Data)is used to load the contents of the memory location stored in byte 2 and 3
+           // into register A. STA is the reverse (Store Accumulator Data)
+           case 0x3a: printf("LDA adr"); break;
+           case 0x32: printf("STA adr"); break;
+
+           // LHLD (Load H and Load L Direct)
+           // This is used to move the address stored in 2 bytes into the register pair HL
+           case 0x2a: printf("LHLD adr"); break;
+
+           //SHDL (Store H and L Direct)
+           // This is used to move L into memory whose addres is in byte 2 an 3, H is stored in the next
+           case 0x22: printf("SHDL adr"); break;
+
+           // LDA X is just like previous LDA, but we are using other registers
+           // format is 00 RP 1010
+           case 0x0a: printf("LDAX B"); break;
+           case 0x1a: printf("LDAX D"); break;
+
+           // STA X (Store Accumulator indirect) is used to store data in register A, where ever
+           // the address stored in provided RP is. Format is 00 RP 0010
+           case 0x02: printf("STAX B"); break;
+           case 0x12: printf("STAX D"); break;
+
+           // XCHG The contents of registers H and L are exchanged with
+           // the contents of registers D and E
+           case 0xeb: printf("XCHG"); break;
+
+           /// // ARITHMETIC // ///
+           // Addition Operations
+           // adds given register to the accumulator
+           // format is 10000 SSS
+           case 0x80: printf("ADD B"); break;
+           case 0x81: printf("ADD C"); break;
+           case 0x82: printf("ADD D"); break;   // add reg B to Acu. 10000 010
+           case 0x83: printf("ADD E"); break;
+           case 0x84: printf("ADD H"); break;
+           case 0x85: printf("ADD L"); break;
+           case 0x86: printf("ADD M"); break;   // adding memory uses address at HL
+           case 0x87: printf("ADD A"); break;
+
+           // Add data to the accumulator, contents of 2 byte
+           case 0xc6: printf("ADI D8"); break;
+
+           // ADC is just like regular additon but with carry
+           case 0x88: printf("ADC B"); break;
+           case 0x89: printf("ADC C"); break;
+           case 0x8a: printf("ADC D"); break;
+           case 0x8b: printf("ADC E"); break;
+           case 0x8c: printf("ADC H"); break;
+           case 0x8d: printf("ADC L"); break;
+           case 0x8e: printf("ADC M"); break;
+           case 0x8f: printf("ADC A"); break;
+
+           // ACI (Add Carry Immediate) The content of the second byte of the instruction and
+           // the content of the CY flag are added to the contents
+           //of the accumulator. The result is placed in the accumulator
+           case 0xce: printf("ACI D8"); break;
+
+           // SUB (Subtract) contents of register are subtracted from contents of accumulator (A)
+           case 0x90: printf("SUB B"); break;
+           case 0x91: printf("SUB C"); break;
+           case 0x92: printf("SUB D"); break;
+           case 0x93: printf("SUB E"); break;
+           case 0x94: printf("SUB H"); break;
+           case 0x95: printf("SUB L"); break;
+           case 0x96: printf("SUB M"); break;
+           case 0x97: printf("SUB A"); break;
+
+           // SUI The content of the second byte of the instruction is from the
+           // content of the accumulator. The result is placed in the accumulator.
+           case 0xd6: printf("SUI D8"); break;
+
+           //
+
+
+
            //LOGICAL OPERATIONS
            //BRANCHING
            //STACK I/O and MACHINE CONTROL
