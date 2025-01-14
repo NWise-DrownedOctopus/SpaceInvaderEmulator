@@ -1,4 +1,4 @@
-#include <stdio.h>
+// #include <stdio.h>
 //Name: Nicholas Wise
 //Project Discription:
 // Emulating Space invaders using the Intel 8080 microcomputer
@@ -174,12 +174,14 @@
            case 0x8e: printf("ADC M"); break;
            case 0x8f: printf("ADC A"); break;
 
-           // ACI (Add Carry Immediate) The content of the second byte of the instruction and
+           // ACI (Add Carry Immediate)
+           // The content of the second byte of the instruction and
            // the content of the CY flag are added to the contents
-           //of the accumulator. The result is placed in the accumulator
+           // of the accumulator. The result is placed in the accumulator
            case 0xce: printf("ACI D8"); break;
 
-           // SUB (Subtract) contents of register are subtracted from contents of accumulator (A)
+           // SUB (Subtract)
+           // contents of register are subtracted from contents of accumulator (A)
            case 0x90: printf("SUB B"); break;
            case 0x91: printf("SUB C"); break;
            case 0x92: printf("SUB D"); break;
@@ -189,15 +191,102 @@
            case 0x96: printf("SUB M"); break;
            case 0x97: printf("SUB A"); break;
 
-           // SUI The content of the second byte of the instruction is from the
+           // SUI (Subtract immediate)
+           // The content of the second byte of the instruction is from the
            // content of the accumulator. The result is placed in the accumulator.
            case 0xd6: printf("SUI D8"); break;
 
-           //
+           // SBB (Subtract register/memory with borrow)
+           // The content of register r and the content of the CY
+           // flag are both subtracted from the accumulator. The
+           // result is placed in the accumulator.
+           case 0x98: printf("SBB B"); break;
+           case 0x99: printf("SBB C"); break;
+           case 0x9a: printf("SBB D"); break;
+           case 0x9b: printf("SBB E"); break;
+           case 0x9c: printf("SBB H"); break;
+           case 0x9d: printf("SBB L"); break;
+           case 0x9e: printf("SBB M"); break;
+           case 0x9f: printf("SBB A"); break;
+
+           // SBI (Subtract immediate with borrow)
+           // The contents of the second byte of the instruction
+           // and the contents of the CY flag are both subtracted
+           // from the accumulator. The result is placed in the
+           // accumulator.
+           case 0xde: printf("SBI D8"); break;
+
+           // INR (Increment Register/Memory)
+           // The content of register r is incremented by one.
+           // Note: All condition flags except CY are affected
+           case 0x04: printf("INR B"); break;
+           case 0x0c: printf("INR C"); break;
+           case 0x14: printf("INR D"); break;
+           case 0x1c: printf("INR E"); break;
+           case 0x24: printf("INR H"); break;
+           case 0x2c: printf("INR L"); break;
+           case 0x34: printf("INR M"); break;
+           case 0x3c: printf("INR A"); break;
+
+           // DCR (Decrement Register/Memory)
+           // The content of register r is decremented by one.
+           // Note: All condition flag~ except CY are affected.
+           case 0x05: printf("DCR B"); break;
+           case 0x0d: printf("DCR C"); break;
+           case 0x15: printf("DCR D"); break;
+           case 0x1d: printf("DCR E"); break;
+           case 0x25: printf("DCR H"); break;
+           case 0x2d: printf("DCR L"); break;
+           case 0x35: printf("DCR M"); break;
+           case 0x3d: printf("DCR A"); break;
+
+           // INX (Increment register pair)
+           // The content of the register pair rp is incremented by
+           // one. Note: No condition flags are affected.
+           case 0x03: printf("INX B"); break;
+           case 0x13: printf("INX D"); break;
+           case 0x23: printf("INX H"); break;
+           case 0x33: printf("INX SP"); break;
+
+           // DCX ()
+           // The content of the register pair rp is decremented by
+           // one. Note: No condition flags are affected
+           case 0x0b: printf("DCX B"); break;
+           case 0x1b: printf("DCX D"); break;
+           case 0x2b: printf("DCX H"); break;
+           case 0x3b: printf("DCX SP"); break;
+
+           // DAD ()
+           //The content of the register pair rp is added to the
+           // content of the register pair H and L. The result is
+           // placed in the register pair H and L. Note: Only the
+           // CY flag is affected. It is set if there is a carry out of
+           // the double precision add; otherwise it is reset.
+           case 0x09: printf("DAD B"); break;
+           case 0x19: printf("DAD D"); break;
+           case 0x29: printf("DAD H"); break;
+           case 0x39: printf("DAD SP"); break;
+
+           // DAA
+           // The eight-bit number in the accumulator is adjusted
+           // to form two four-bit Binary-Coded-Decimal digits by
+           // the following process:
+           // 1. If the value of the least significant 4 bits of the
+           // accumulator is greater than 9 or if the AC flag
+           // is set, 6 is added to the accumulator.
+           // 2. If the value of the most significant 4 bits of the
+           // accumulator is now greater than 9, or if the CY
+           // flag is set, 6 is added to the most significant 4
+           // bits of the accumulator
+           case 0x27: printf("DAA"); break;
+
+
+           /// // LOGICAL GROUP // ///
+           
 
 
 
-           //LOGICAL OPERATIONS
+           // LOGICAL OPERATIONS
            //BRANCHING
            //STACK I/O and MACHINE CONTROL
            case 0x00: printf("NOP"); break;
